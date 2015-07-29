@@ -22,17 +22,6 @@ extern void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTi
 extern void CALLBACK OnD3D9LostDevice( void* pUserContext );
 extern void CALLBACK OnD3D9DestroyDevice( void* pUserContext );
 
-
-//--------------------------------------------------------------------------------------
-// Reject any D3D10 devices that aren't acceptable by returning false
-//--------------------------------------------------------------------------------------
-bool CALLBACK IsD3D10DeviceAcceptable( UINT Adapter, UINT Output, D3D10_DRIVER_TYPE DeviceType,
-                                       DXGI_FORMAT BackBufferFormat, bool bWindowed, void* pUserContext )
-{
-    return true;
-}
-
-
 //--------------------------------------------------------------------------------------
 // Called right before creating a D3D9 or D3D10 device, allowing the app to modify the device settings as needed
 //--------------------------------------------------------------------------------------
@@ -41,62 +30,12 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
     return true;
 }
 
-
-//--------------------------------------------------------------------------------------
-// Create any D3D10 resources that aren't dependant on the back buffer
-//--------------------------------------------------------------------------------------
-HRESULT CALLBACK OnD3D10CreateDevice( ID3D10Device* pd3dDevice, const DXGI_SURFACE_DESC* pBackBufferSurfaceDesc,
-                                      void* pUserContext )
-{
-    return S_OK;
-}
-
-
-//--------------------------------------------------------------------------------------
-// Create any D3D10 resources that depend on the back buffer
-//--------------------------------------------------------------------------------------
-HRESULT CALLBACK OnD3D10ResizedSwapChain( ID3D10Device* pd3dDevice, IDXGISwapChain* pSwapChain,
-                                          const DXGI_SURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext )
-{
-    return S_OK;
-}
-
-
 //--------------------------------------------------------------------------------------
 // Handle updates to the scene.  This is called regardless of which D3D API is used
 //--------------------------------------------------------------------------------------
 void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext )
 {
 }
-
-
-//--------------------------------------------------------------------------------------
-// Render the scene using the D3D10 device
-//--------------------------------------------------------------------------------------
-void CALLBACK OnD3D10FrameRender( ID3D10Device* pd3dDevice, double fTime, float fElapsedTime, void* pUserContext )
-{
-    // Clear render target and the depth stencil 
-    float ClearColor[4] = { 0.176f, 0.196f, 0.667f, 0.0f };
-    pd3dDevice->ClearRenderTargetView( DXUTGetD3D10RenderTargetView(), ClearColor );
-    pd3dDevice->ClearDepthStencilView( DXUTGetD3D10DepthStencilView(), D3D10_CLEAR_DEPTH, 1.0, 0 );
-}
-
-
-//--------------------------------------------------------------------------------------
-// Release D3D10 resources created in OnD3D10ResizedSwapChain 
-//--------------------------------------------------------------------------------------
-void CALLBACK OnD3D10ReleasingSwapChain( void* pUserContext )
-{
-}
-
-
-//--------------------------------------------------------------------------------------
-// Release D3D10 resources created in OnD3D10CreateDevice 
-//--------------------------------------------------------------------------------------
-void CALLBACK OnD3D10DestroyDevice( void* pUserContext )
-{
-}
-
 
 //--------------------------------------------------------------------------------------
 // Handle messages to the application
@@ -163,14 +102,6 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
     DXUTSetCallbackD3D9FrameRender( OnD3D9FrameRender );
     DXUTSetCallbackD3D9DeviceLost( OnD3D9LostDevice );
     DXUTSetCallbackD3D9DeviceDestroyed( OnD3D9DestroyDevice );
-
-    // Set the D3D10 DXUT callbacks. Remove these sets if the app doesn't need to support D3D10
-    DXUTSetCallbackD3D10DeviceAcceptable( IsD3D10DeviceAcceptable );
-    DXUTSetCallbackD3D10DeviceCreated( OnD3D10CreateDevice );
-    DXUTSetCallbackD3D10SwapChainResized( OnD3D10ResizedSwapChain );
-    DXUTSetCallbackD3D10FrameRender( OnD3D10FrameRender );
-    DXUTSetCallbackD3D10SwapChainReleasing( OnD3D10ReleasingSwapChain );
-    DXUTSetCallbackD3D10DeviceDestroyed( OnD3D10DestroyDevice );
 
     // Perform any application-level initialization here
 
