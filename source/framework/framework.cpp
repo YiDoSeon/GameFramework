@@ -105,15 +105,20 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
     // Perform any application-level initialization here
 
+	// Setup Video
+	VideoSetup setup(1024,720);
+	setup.isWindowed = true;
+
+	// Rename Game Title
+	g_strGameTitle = L"MyGame";
+
     DXUTInit( true, true, NULL ); // Parse the command line, show msgboxes on error, no extra command line params
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
-    DXUTCreateWindow( L"framework" );
-    DXUTCreateDevice( true, 640, 480 );
+	DXUTCreateWindow(g_strGameTitle);
+	DXUTCreateDevice(setup.isWindowed, setup.height, setup.witdh);
     DXUTMainLoop(); // Enter into the DXUT render loop
 
     // Perform any application-level cleanup here
 
     return DXUTGetExitCode();
 }
-
-

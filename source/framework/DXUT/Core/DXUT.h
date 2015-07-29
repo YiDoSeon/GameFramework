@@ -97,6 +97,8 @@
 // HRESULT translation for Direct3D and other APIs 
 #include <dxerr.h>
 
+// Import Custom Header file
+#include "../../Globals.h"
 
 #if defined(DEBUG) || defined(_DEBUG)
 #ifndef V
