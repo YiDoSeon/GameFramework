@@ -31,5 +31,15 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\dxut\optional\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\DXUT\Optional\directx.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\WindowIcon.png" />
+    <Image Include="..\..\resources\WindowIcon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

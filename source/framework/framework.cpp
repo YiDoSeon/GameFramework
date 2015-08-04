@@ -115,6 +115,7 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
     DXUTInit( true, true, NULL ); // Parse the command line, show msgboxes on error, no extra command line params
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
+	//HICON hIcon = (HICON)LoadImage(NULL, L"..\..\resources\WindowIcon.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	DXUTCreateWindow(g_strGameTitle);
 	DXUTCreateDevice(setup.isWindowed, setup.height, setup.witdh);
     DXUTMainLoop(); // Enter into the DXUT render loop
