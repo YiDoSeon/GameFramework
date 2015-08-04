@@ -98,7 +98,7 @@
 #include <dxerr.h>
 
 // Import Custom Header file
-#include "../../Globals.h"
+//#include "../../Globals.h"
 
 #if defined(DEBUG) || defined(_DEBUG)
 #ifndef V
